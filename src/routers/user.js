@@ -103,7 +103,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 
 const upload = mutler({
     limits: {
-        fileSize: 200000
+        fileSize: 2000000
     },
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpg|png)/)) {
@@ -120,7 +120,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
     await req.user.save()
     res.send()
 }, (error, req, res, next) => {
-    res.status(400).send({error: error.message})
+    res.status(500).send({error: error.message})
 })
 
 router.delete('/users/me/avatar', auth, async (req, res) => {
