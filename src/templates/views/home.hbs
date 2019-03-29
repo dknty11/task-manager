@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    <title>Home</title>
+</head>
+<body>
+    <dev class="flex-container">
+        <dev class="flex-item">
+            <div class="first-column">
+                <ul>
+                    {{#each tasks}}
+                    <li>{{description}} - {{complete}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </dev>
+        <dev class="flex-item">2</dev>
+        <dev class="flex-item">3</dev>
+        <dev class="flex-item">4</dev>
+    </dev>
+    <script src="../../../js/home.js"></script>
+</body>
+</html>

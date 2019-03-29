@@ -21,16 +21,34 @@ router.post('/users', async (req, res) => {
 
 router.post('/users/login', async (req, res) => {
     try {
-        const user = await User.findByCredentials(req.body.email, req.body.password)
+        const user = await User.findByCredentials(req.body.username, req.body.password)
         const token = await user.generateAuthToken()
-        res.send({ user, token })
+        // res.send({ user, token })
+
+        // save user to req.session, the session already define in app.js
+        req.session.user = user
+        res.cookie('token', token)
+        // res.redirect('/users/me')
+        res.json({
+            success: true,
+            message: 'Authentication successful!',
+            token: token
+        });
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.get('/users/me', auth, async (req, res) => {
-    res.send(req.user)
+router.get('/users/me', async (req, res) => {
+    if (req.session && req.session.user) {
+        // console.log('You are logged in')
+        // res.send(req.session.user)
+        res.render('home')
+    } else {
+        res.status(404).send('error login')
+    }
+
 })
 
 router.get('/user/:id', async (req, res) => {

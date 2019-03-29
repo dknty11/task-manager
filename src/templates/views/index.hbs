@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do App</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    {{>header}}
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h1>Login</h1>
+            <form action="/users/login" method="post" id="loginForm">
+                <label for="Email">Email</label>
+                <input type="text" name="username" value="joey@enclave.vn" placeholder="your-email@example.com" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" value="123@123" placeholder="Password" required>
+                <input type="submit" value="Login"></input>
+            </form>
+        </div>
+    </div>
+    {{!-- <dev class="flex-container">
+        <dev class="flex-item">
+            <div class="first-column">
+                <ul>
+                    {{#each tasks}}
+                    <li>{{description}} - {{complete}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </dev>
+        <dev class="flex-item">2</dev>
+        <dev class="flex-item">3</dev>
+        <dev class="flex-item">4</dev>
+    </dev> --}}
+
+    {{>footer}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
