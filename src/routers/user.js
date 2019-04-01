@@ -29,7 +29,7 @@ router.post('/users/login', async (req, res) => {
         // save user to req.session, the session already define in app.js
         req.session.user = user
         res.cookie('token', token)
-        res.redirect('/users/me')
+        res.redirect('/tasks')
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
@@ -39,7 +39,7 @@ router.post('/users/login', async (req, res) => {
 router.get('/users/me', async (req, res) => {
     if (req.session && req.session.user) {
         // console.log('You are logged in')
-        res.render('home')
+        // res.redirect('/tasks')
     } else {
         res.status(404).send('error login')
     }

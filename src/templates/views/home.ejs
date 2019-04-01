@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    <title>Home</title>
+</head>
+<body>
+    <% include ../partials/header %>
+    <% if (data !== null) { %>
+    <!-- <div class="flex-container">
+        <div class="flex-item"> -->
+            <div class="column">
+                <div class="portlet">
+                    <div class="portlet-header">Feeds</div>
+                    <div class="portlet-content">
+                        <% for(var i=0; i<data.length; i++) { %>
+                            <li><p id="description"><%= data[i].description %></p><p id="complete"><%= data[i].complete %></p></li>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="portlet">
+                    <div class="portlet-header">News</div>
+                    <div class="portlet-content">a</div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="portlet">
+                    <div class="portlet-header">Shopping</div>
+                    <div class="portlet-content">b</div>
+                </div>
+            </div>
+                
+            <div class="column">
+                <div class="portlet">
+                    <div class="portlet-header">Links</div>
+                    <div class="portlet-content">c</div>
+                </div>
+                <div class="portlet">
+                    <div class="portlet-header">Images</div>
+                    <div class="portlet-content">d</div>
+                </div>
+            </div>
+            <!-- <div class="column">
+                <div class="item">
+                    <ul>
+                        <% for(var i=0; i<data.length; i++) { %>
+                        <li><p id="description"><%= data[i].description %></p><p id="complete"><%= data[i].complete %></p></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="flex-item"></div>
+        <div class="flex-item"></div>
+        <div class="flex-item"></div> -->
+    <!-- </div> -->
+    <% } else { %>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h1>Create Task</h1>
+            <form action="/tasks" method="post" id="taskForm">
+                <label for="description">Task Description</label>
+                <input type="text" name="description" placeholder="Enter task description">
+                <label for="complete">Complete</label>
+                <input type="text" name="complete" placeholder="True or false only">
+                <input type="submit" value="Create" name="submit">
+            </form>
+        </div>
+    </div>
+    <% } %>
+    <% include ../partials/footer %>
+    <script src="../../../js/home.js"></script>
+</body>
+</html>

@@ -1,17 +1,55 @@
-console.log('here is home')
-// const taskOne = document.getElementById('task1')
+const messageDescription = document.getElementById('description')
+const status = document.getElementById('complete')
 
 const getTask = () => fetch('http://localhost:3000/tasks').then((res) => {
     res.json().then((data) => {
-        console.log('here is: ' + data)
-        // if (data.error) {
-        //     taskOne.textContent = data.error
-        // } else {
-        //     taskOne.textContent = data.description
-        //     taskOne.textContent = data.complete
-        // }
+
     })
 })
 
-getTask()
-  
+// getTask()
+
+
+$('.column').sortable({
+    connectWith: '.column',
+    handle: ".portlet-header",
+    cancel: ".portlet-toggle",
+    start: function (event, ui) {
+        ui.item.addClass("tilt");
+        tilt_direction(ui.item);
+    },
+    stop: function(event, ui) {
+        ui.item.removeClass("tilt");
+        $("html").unbind("mousemove", ui.item.data("move_handler"));
+        ui.item.removeData("move_handler")
+    }
+})
+
+function tilt_direction(item) {
+    var left_pos = item.position().left
+    var move_handler = function(e) {
+        if (e.pageX >= left_pos) {
+            item.addClass("right");
+            item.removeClass("left");
+        } else {
+            item.addClass("left");
+            item.removeClass("right");
+        }
+        left_pos = e.pageX
+    };
+
+    $("html").bind("mousemove", move_handler);
+    item.data("move_handler", move_handler);
+}
+
+$(".portlet")
+    .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+    .find("portlet-header")
+    .addClass("ui-widget-header ui-corner-all")
+    .prepend("<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+
+$(".portlet-toggle").click( function () {
+    var icon = $(this);
+    icon.toggleClass("ui-icon-minusthich ui-icon-plusthick");
+    icon.closest(".portlet").find(".portlet-content").toggle();
+})

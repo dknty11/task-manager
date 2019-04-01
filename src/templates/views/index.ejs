@@ -8,21 +8,20 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    {{>header}}
+    <% include ../partials/header %>
     <div class="centered-form">
         <div class="centered-form__box">
             <h1>Login</h1>
             <form action="/users/login" method="post" id="loginForm">
                 <label for="Email">Email</label>
-                <input type="text" name="username" value="nguyenhoaivinh.1994@gmail.com" placeholder="your-email@example.com" required>
+                <input type="text" name="username" value="joey@enclave.vn" placeholder="your-email@example.com" required>
                 <label for="password">Password</label>
                 <input type="password" name="password" value="123@123" placeholder="Password" required>
                 <input type="submit" value="Login"></input>
             </form>
         </div>
     </div>
-    {{>footer}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <% include ../partials/footer %>
     <script src="js/index.js"></script>
 </body>
 </html>

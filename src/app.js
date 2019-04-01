@@ -1,7 +1,8 @@
 const express = require('express')
 const path = require('path')
-const hbs = require('hbs')
 const session = require('client-sessions')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 require('./db/mongoose')
 const userRouter = require('./routers/user')
@@ -14,17 +15,19 @@ const viewsPath = path.join(__dirname, 'templates/views')
 const partialsPath = path.join(__dirname, 'templates/partials')
 
 // Setup handlebars engine and views location
-app.set('view engine', 'hbs')
+app.set('view engine', 'ejs')
 app.set('views', viewsPath)
-hbs.registerPartials(partialsPath)
+// hbs.registerPartials(partialsPath)
 
 // Setup static dir to serve
 app.use(express.static(publicDirectoryPath))
 
 // Setup body parser from express to grab info from POST
-var bodyParser = require('body-parser')
 app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({  extended: true })) // support encoded bodies
+
+// User cookie parser to handle cookie
+app.use(cookieParser())
 
 // Setup session for express
 app.use(session({
