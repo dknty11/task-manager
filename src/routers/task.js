@@ -13,6 +13,7 @@ router.post('/tasks', auth, async (req, res) => {
     try {
         await task.save()
         res.status(201).send(task)
+        res.render('home')
     } catch (e) {
         res.status(500).send(e)
     }
@@ -54,8 +55,6 @@ router.get('/tasks', auth, async (req, res) => {
             match: match,
             options: options,
         }).execPopulate()
-        console.log('Req: ' + req.session.user)
-        console.log('Response' + res)
         res.send(req.user.tasks)
     } catch (e) {
         res.status(500).send(e)

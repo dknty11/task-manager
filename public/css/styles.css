@@ -31,7 +31,7 @@ input {
     outline: none;
 }
 
-button {
+input[type="submit"] {
     cursor: pointer;
     padding: 12px;
     background: #7C5CBF;

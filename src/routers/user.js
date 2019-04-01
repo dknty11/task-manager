@@ -14,6 +14,7 @@ router.post('/users', async (req, res) => {
         sendWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()
         res.status(201).send({ user, token })
+        res.redirect('/users/me')
     } catch (e) {
         res.status(500).send(e)
     }
@@ -28,12 +29,7 @@ router.post('/users/login', async (req, res) => {
         // save user to req.session, the session already define in app.js
         req.session.user = user
         res.cookie('token', token)
-        // res.redirect('/users/me')
-        res.json({
-            success: true,
-            message: 'Authentication successful!',
-            token: token
-        });
+        res.redirect('/users/me')
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
@@ -43,7 +39,6 @@ router.post('/users/login', async (req, res) => {
 router.get('/users/me', async (req, res) => {
     if (req.session && req.session.user) {
         // console.log('You are logged in')
-        // res.send(req.session.user)
         res.render('home')
     } else {
         res.status(404).send('error login')
