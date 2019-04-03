@@ -12,8 +12,10 @@ router.post('/tasks', auth, async (req, res) => {
 
     try {
         await task.save()
-        res.status(201).send(task)
-        res.render('home')
+        // res.json({
+        //     status: 201
+        // })
+        res.render('home', { data: req.user.tasks })
     } catch (e) {
         res.status(500).send(e)
     }
@@ -56,6 +58,7 @@ router.get('/tasks', auth, async (req, res) => {
             options: options,
         }).execPopulate()
         // res.send(req.user.tasks)
+        // console.log(req.user.tasks)
         res.render('home', { data: req.user.tasks })
     } catch (e) {
         res.status(500).send(e)

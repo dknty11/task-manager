@@ -8,21 +8,43 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    {{>header}}
     <div class="centered-form">
         <div class="centered-form__box">
             <h1>Sign Up</h1>
             <form action="/users" method="post" id="signUpForm">
-                <label for="Name" name="name">Name</label>
-                <input type="text" name="name" placeholder="Your name" required>
+                <label for="Name">Name</label>
+                <input type="text" id="name" placeholder="Your name" required>
                 <label for="Email">Email</label>
-                <input type="text" name="email" placeholder="your-email@example.com" required>
+                <input type="text" id="email" placeholder="your-email@example.com" required>
                 <label for="password">Password</label>
-                <input type="password" name="password" value="123@123" placeholder="Password" required>
-                <input type="submit" value="Sign Up" name="submit">
+                <input type="password" id="password" value="123@123" placeholder="Password" required>
+                <button value="Sign Up" name="submit">Submit</button>
             </form>
         </div>
     </div>
-    {{>footer}}
+    <% include ../partials/footer %>
+    <script>
+        var api_url = 'localhost:3000'
+        $('button').click(function(e) {
+            e.preventDefault();
+            var name = document.getElementById('name').value
+            var email = document.getElementById('email').value
+            var password = document.getElementById('password').value
+            $.ajax({
+                method: 'POST',
+                url: '/users',
+                data: {
+                    name: name,
+                    email: email,
+                    password: password
+                }
+            }).done( function(res) {
+                if (res.status) {
+                    console.log(res)
+                    window.location.href = res.redirect
+                }
+            })
+        })
+    </script>
 </body>
 </html>

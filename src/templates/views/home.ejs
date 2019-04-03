@@ -9,40 +9,40 @@
 </head>
 <body>
     <% include ../partials/header %>
-    <% if (data !== null) { %>
+    <% if (data.length !== 0) { %>
     <!-- <div class="flex-container">
         <div class="flex-item"> -->
             <div class="column">
-                <div class="portlet">
-                    <div class="portlet-header">Feeds</div>
-                    <div class="portlet-content">
-                        <% for(var i=0; i<data.length; i++) { %>
-                            <li><p id="description"><%= data[i].description %></p><p id="complete"><%= data[i].complete %></p></li>
+                <% for(var i=0; i<data.length; i++) { %>
+                    <% if (!data[i].complete) { %>
+                        <div class="portlet">
+                            <div class="portlet-header"><%= data[i].complete %></div>
+                            <div class="portlet-content"><%= data[i].description %></div>
+                        </div>
                         <% } %>
-                    </div>
-                </div>
-                <div class="portlet">
-                    <div class="portlet-header">News</div>
-                    <div class="portlet-content">a</div>
-                </div>
+                    <% } %>
             </div>
             
             <div class="column">
-                <div class="portlet">
-                    <div class="portlet-header">Shopping</div>
-                    <div class="portlet-content">b</div>
-                </div>
+                <% for (var i=0; i<data.length; i++) { %>
+                    <% if (data[i].status === 'progress') { %>
+                        <div class="portlet">
+                            <div class="portlet-header"></div>
+                            <div class="portlet-content"></div>
+                        </div>
+                        <% } %>
+                    <% } %>
             </div>
                 
             <div class="column">
-                <div class="portlet">
-                    <div class="portlet-header">Links</div>
-                    <div class="portlet-content">c</div>
-                </div>
-                <div class="portlet">
-                    <div class="portlet-header">Images</div>
-                    <div class="portlet-content">d</div>
-                </div>
+                <% for (var i=0; i<data.length; i++) { %>
+                    <% if (data[i].complete) { %>
+                        <div class="portlet">
+                            <div class="portlet-header">Task 1</div>
+                            <div class="portlet-content"><%= data[i].description %></div>
+                        </div>
+                    <% } %>
+                <% } %>
             </div>
             <!-- <div class="column">
                 <div class="item">

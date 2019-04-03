@@ -11,10 +11,15 @@ router.post('/users', async (req, res) => {
 
     try {
         await user.save()
-        sendWelcomeEmail(user.email, user.name)
+        // sendWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()
-        res.status(201).send({ user, token })
-        res.redirect('/users/me')
+        req.session.user = user
+        res.cookie('token', token)
+        res.json({ 
+            status: true,
+            redirect: '/users/me'
+        })
+        // res.status(201).send({ user, token })
     } catch (e) {
         res.status(500).send(e)
     }
@@ -38,10 +43,14 @@ router.post('/users/login', async (req, res) => {
 
 router.get('/users/me', async (req, res) => {
     if (req.session && req.session.user) {
-        // console.log('You are logged in')
-        // res.redirect('/tasks')
+        console.log('You are logged in')
+        res.redirect('/tasks')
     } else {
-        res.status(404).send('error login')
+        res.json({
+            status: 401,
+            message: 'error login'
+        })
+        res.redirect('/users/login')
     }
 
 })

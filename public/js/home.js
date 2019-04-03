@@ -1,15 +1,6 @@
 const messageDescription = document.getElementById('description')
 const status = document.getElementById('complete')
 
-const getTask = () => fetch('http://localhost:3000/tasks').then((res) => {
-    res.json().then((data) => {
-
-    })
-})
-
-// getTask()
-
-
 $('.column').sortable({
     connectWith: '.column',
     handle: ".portlet-header",
@@ -44,7 +35,7 @@ function tilt_direction(item) {
 
 $(".portlet")
     .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
-    .find("portlet-header")
+    .find(".portlet-header")
     .addClass("ui-widget-header ui-corner-all")
     .prepend("<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
 
