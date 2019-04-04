@@ -16,7 +16,7 @@ router.post('/users', async (req, res) => {
         req.session.user = user
         res.cookie('token', token)
         res.json({ 
-            status: true,
+            status: 200,
             redirect: '/users/me'
         })
         // res.status(201).send({ user, token })
@@ -100,6 +100,7 @@ router.delete('/users/me', auth, async(req, res) => {
 })
 
 router.post('/users/logout',auth, async (req, res) => {
+    console.log(req)
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token

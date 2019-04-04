@@ -3,7 +3,7 @@ const port = process.env.PORT
 
 // Remember to set this route for calling index hbs template
 app.get('', (req, res) => {
-    res.render('index')
+    res.render('index', { user: req.user })
 })
 
 app.get('/signup', (req, res) => {

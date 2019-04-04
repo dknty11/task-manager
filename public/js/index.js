@@ -10,8 +10,11 @@ $('button').click(function (e) {
             username: username,
             password: password
         }
-    }).done(function() {
-        console.log('Success!')
+    }).done(function(res) {
+        // var bodyContent = response.match(/<body>[\s\S]+<\/body>/)[0]
+        // console.log(bodyContent)
+        // $('body').html(bodyContent);
+        window.location.href = '/tasks'
     }).fail(function(e) {
         console.log(e.status)
         if (e.status == 400) {

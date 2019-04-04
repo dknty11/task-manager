@@ -5,6 +5,7 @@ const router = new express.Router()
 
 // Tasks
 router.post('/tasks', auth, async (req, res) => {
+    // console.log(req.user)
     const task = new Task({
         ...req.body,
         owner: req.user._id
@@ -15,10 +16,15 @@ router.post('/tasks', auth, async (req, res) => {
         // res.json({
         //     status: 201
         // })
-        res.render('home', { data: req.user.tasks })
+        console.log(req.user.tasks)
+        res.redirect('/tasks')
     } catch (e) {
         res.status(500).send(e)
     }
+})
+
+router.get('/tasks/new', (req, res) => {
+    res.render('create-task', { user: req.user })
 })
 
 // GET /tasks?complete=false
@@ -58,8 +64,7 @@ router.get('/tasks', auth, async (req, res) => {
             options: options,
         }).execPopulate()
         // res.send(req.user.tasks)
-        // console.log(req.user.tasks)
-        res.render('home', { data: req.user.tasks })
+        res.render('home', { 'data': req.user.tasks, 'user': req.user })
     } catch (e) {
         res.status(500).send(e)
     }

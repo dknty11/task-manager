@@ -3,7 +3,8 @@ const status = document.getElementById('complete')
 
 $('.column').sortable({
     connectWith: '.column',
-    handle: ".portlet-header",
+    // helper: 'clone',
+    // handle: ".portlet-header",
     cancel: ".portlet-toggle",
     start: function (event, ui) {
         ui.item.addClass("tilt");

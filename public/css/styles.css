@@ -197,6 +197,7 @@ body {
 .portlet {
   margin: 0 1em 1em 0;
   padding: 0.3em;
+  cursor: move;
 }
 
 .portlet-header {
