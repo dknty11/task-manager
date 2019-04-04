@@ -5,10 +5,14 @@ $('.column').sortable({
     connectWith: '.column',
     // helper: 'clone',
     // handle: ".portlet-header",
+    serialize: "key",
     cancel: ".portlet-toggle",
     start: function (event, ui) {
         ui.item.addClass("tilt");
         tilt_direction(ui.item);
+        var tex = $(ui.item).attr('task-id')
+        console.log(tex)
+        console.log(ui.item)
     },
     stop: function(event, ui) {
         ui.item.removeClass("tilt");

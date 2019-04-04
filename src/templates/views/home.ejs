@@ -6,8 +6,9 @@
             <div class="column">
                 <% for(var i=0; i<data.length; i++) { %>
                     <% if (!data[i].complete) { %>
-                        <div class="portlet handle">
-                            <div class="portlet-header"><%= data[i].complete %></div>
+                        <div class="portlet handle" task-id="<%=data[i]._id%>">
+                            <input type="hidden" value=<%=data[i]._id%>>
+                            <div  class="portlet-header"><%= data[i].complete %></div>
                             <div class="portlet-content"><%= data[i].description %></div>
                         </div>
                         <% } %>
@@ -17,7 +18,7 @@
             <div class="column">
                 <% for (var i=0; i<data.length; i++) { %>
                     <% if (data[i].status === 'progress') { %>
-                        <div class="portlet handle">
+                        <div class="portlet handle" task-id="<%=data[i]._id%>">
                             <div class="portlet-header"></div>
                             <div class="portlet-content"></div>
                         </div>
@@ -28,7 +29,7 @@
             <div class="column">
                 <% for (var i=0; i<data.length; i++) { %>
                     <% if (data[i].complete) { %>
-                        <div class="portlet handle">
+                        <div class="portlet handle" task-id="<%=data[i]._id%>">
                             <div class="portlet-header">Task 1</div>
                             <div class="portlet-content"><%= data[i].description %></div>
                         </div>

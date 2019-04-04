@@ -100,7 +100,6 @@ router.delete('/users/me', auth, async(req, res) => {
 })
 
 router.post('/users/logout',auth, async (req, res) => {
-    console.log(req)
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
