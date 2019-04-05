@@ -5,8 +5,7 @@
         <% for(var i=0; i<data.length; i++) { %>
             <% if (data[i].status === 'to do') { %>
                 <div class="portlet handle" task-id="<%=data[i]._id%>">
-                    <input type="hidden" value=<%=data[i]._id%>>
-                    <div  class="portlet-header">To Do</div>
+                    <div  class="portlet-header"><a href="/tasks/<%= data[i]._id %>">To Do</a></div>
                     <div class="portlet-content"><%= data[i].description %></div>
                 </div>
                 <% } %>
@@ -17,7 +16,7 @@
         <% for (var i=0; i<data.length; i++) { %>
             <% if (data[i].status === 'progress') { %>
                 <div class="portlet handle" task-id="<%=data[i]._id%>">
-                    <div class="portlet-header">In Progress</div>
+                    <div class="portlet-header"><a href="/tasks/<%= data[i]._id %>">In Progress</a></div>
                     <div class="portlet-content"><%= data[i].description %></div>
                 </div>
                 <% } %>
@@ -28,7 +27,7 @@
         <% for (var i=0; i<data.length; i++) { %>
             <% if (data[i].complete) { %>
                 <div class="portlet handle" task-id="<%=data[i]._id%>">
-                    <div class="portlet-header">Done</div>
+                    <div class="portlet-header"><a href="/tasks/<%= data[i]._id %>">Done</a></div>
                     <div class="portlet-content"><%= data[i].description %></div>
                 </div>
             <% } %>

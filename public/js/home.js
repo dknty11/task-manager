@@ -22,7 +22,7 @@ $('#column1, #column2, #column3').sortable({
     // }
     receive: function(event, ui) {
         var target = event.target.id
-        console.log(`receive at: ${target}`)
+        // console.log(`receive at: ${target}`)
         var task_id = $(ui.item).attr('task-id')
         var complete = false
         switch (target) {
@@ -37,9 +37,7 @@ $('#column1, #column2, #column3').sortable({
                 complete: complete,
                 status: status
             }
-        }).done((res) => {
-            window.location.href = '/tasks'
-        })
+        }).done(() => window.location.href = '/tasks')
     }
 })
 
@@ -74,3 +72,18 @@ $(".portlet-toggle").click( function () {
     icon.toggleClass("ui-icon-minusthich ui-icon-plusthick");
     icon.closest(".portlet").find(".portlet-content").toggle();
 })
+
+// Handle event when clicking tag a to go to detail task
+
+// $('a').click(function(e) {
+//     e.preventDefault()
+//     // var task_id = $(this).attr('id')
+//     var task_id = this.id
+//     $.ajax({
+//         url: '/tasks/' + task_id,
+//         method: 'GET'
+//     }).done((res) => {
+//         window.location.href = '/tasks/' + res._id
+//         console.log(res)
+//     })
+// })

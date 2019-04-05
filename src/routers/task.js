@@ -80,7 +80,8 @@ router.get('/tasks/:id', auth, async (req, res) => {
             return res.status(404).send()
         }
 
-        res.send(task)
+        // res.send(task)
+        res.render('show', { data: task, user: req.user })
     } catch (e) {
         res.status(400).send(e)
     }
