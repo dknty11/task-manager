@@ -12,7 +12,9 @@ const taskSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: false
+        trim: true,
+        lowercase: true,
+        default: 'to do'
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

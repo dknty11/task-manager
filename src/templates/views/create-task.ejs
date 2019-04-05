@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+<body>
+    <div class="centered-form">
+        <div class="centered-form__box">
+        <h1>Create Task</h1>
+        <form action="/tasks" method="post" id="taskForm">
+            <label for="description">Task Description</label>
+            <input type="text" name="description" placeholder="Enter task description">
+            <label for="complete">Complete</label>
+            <input type="text" name="complete" placeholder="True or false only">
+            <input type="submit" value="Create" name="submit">
+        </form>
+    </div>
+</div>
+</body>
+<% include ../partials/footer %>

@@ -1,44 +1,42 @@
+<% if (data.length !== 0) { %>
 <% include ../partials/header %>
 <body>
-    <% if (data.length !== 0) { %>
-    <!-- <div class="flex-container">
-        <div class="flex-item"> -->
-            <div class="column">
-                <% for(var i=0; i<data.length; i++) { %>
-                    <% if (!data[i].complete) { %>
-                        <div class="portlet handle" task-id="<%=data[i]._id%>">
-                            <input type="hidden" value=<%=data[i]._id%>>
-                            <div  class="portlet-header"><%= data[i].complete %></div>
-                            <div class="portlet-content"><%= data[i].description %></div>
-                        </div>
-                        <% } %>
-                    <% } %>
-            </div>
-            
-            <div class="column">
-                <% for (var i=0; i<data.length; i++) { %>
-                    <% if (data[i].status === 'progress') { %>
-                        <div class="portlet handle" task-id="<%=data[i]._id%>">
-                            <div class="portlet-header"></div>
-                            <div class="portlet-content"></div>
-                        </div>
-                        <% } %>
-                    <% } %>
-            </div>
-                
-            <div class="column">
-                <% for (var i=0; i<data.length; i++) { %>
-                    <% if (data[i].complete) { %>
-                        <div class="portlet handle" task-id="<%=data[i]._id%>">
-                            <div class="portlet-header">Task 1</div>
-                            <div class="portlet-content"><%= data[i].description %></div>
-                        </div>
-                    <% } %>
+    <div class="column" id="column1">
+        <% for(var i=0; i<data.length; i++) { %>
+            <% if (data[i].status === 'to do') { %>
+                <div class="portlet handle" task-id="<%=data[i]._id%>">
+                    <input type="hidden" value=<%=data[i]._id%>>
+                    <div  class="portlet-header">To Do</div>
+                    <div class="portlet-content"><%= data[i].description %></div>
+                </div>
                 <% } %>
-            </div>
-    <% } else { %>
-    <% include ./create-task %>
-    <% } %>
+            <% } %>
+    </div>
+    
+    <div class="column" id="column2">
+        <% for (var i=0; i<data.length; i++) { %>
+            <% if (data[i].status === 'progress') { %>
+                <div class="portlet handle" task-id="<%=data[i]._id%>">
+                    <div class="portlet-header">In Progress</div>
+                    <div class="portlet-content"><%= data[i].description %></div>
+                </div>
+                <% } %>
+            <% } %>
+    </div>
+        
+    <div class="column" id="column3">
+        <% for (var i=0; i<data.length; i++) { %>
+            <% if (data[i].complete) { %>
+                <div class="portlet handle" task-id="<%=data[i]._id%>">
+                    <div class="portlet-header">Done</div>
+                    <div class="portlet-content"><%= data[i].description %></div>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
 </body>
 <% include ../partials/footer %>
 <script src="../../../js/home.js"></script>
+<% } else { %>
+<% include ./create-task %>
+<% } %>
