@@ -5,7 +5,6 @@ const router = new express.Router()
 
 // Tasks
 router.post('/tasks', auth, async (req, res) => {
-    console.log(req.body)
     const task = new Task({
         ...req.body,
         owner: req.user._id
@@ -16,7 +15,6 @@ router.post('/tasks', auth, async (req, res) => {
         // res.json({
         //     status: 201
         // })
-        console.log(req.user.tasks)
         res.redirect('/tasks')
     } catch (e) {
         res.status(500).send(e)
