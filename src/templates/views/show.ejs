@@ -3,12 +3,15 @@
     <div class="container">
         <div>
             <label for="status">Status: </label>
+            <input type="hidden" id="task_id" value="<%=data._id%>">
             <p><%= data.status %></p>
             <label for="description">Description: </label>
             <p><%= data.description %></p>
             <label for="complete">Complete: </label>
             <p><%= data.complete %></p>
+            <button name="delete">Delete</button>
         </div>
     </div>
 </body>
 <% include ../partials/footer %>
+<script src="../js/delete.js"></script>

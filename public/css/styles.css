@@ -1,26 +1,41 @@
 /* General Styles */
 
-.container {
-  margin: 20px;
-  padding: 20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.container {
+  padding: 10px;
 }
 
 html {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 body {
-    line-height: 1.4;
-    color: #333333;
-    font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.4;
+  color: #333333;
 }
 
+footer {
+  color: rgb(103, 117, 117);
+  border-top: 1px solid #888888;
+  margin-top: 20px;
+  padding: 16px;
+}
+
+footer p {
+  float: right;
+}
 
 label {
     display: block;
@@ -44,6 +59,23 @@ input[type="submit"] {
     color: white;
     font-size: 16px;
     transition: background .3s ease;
+}
+
+select {
+  font-size: 14px;
+  border: 1px solid #eeeeee;
+  padding: 12px;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px;
+  background: #7C5CBF;
+  border: none;
+  color: white;
+  font-size: 16px;
+  transition: background .3s ease;
 }
 
 button:hover {
@@ -90,10 +122,14 @@ button:hover {
 }
 
 .column {
-    flex-direction: column;
-    flex-grow: 0;
-    padding: 24px 24px 0 24px;
-    max-height: 100vh;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 24px 24px 0 24px;
+  margin: 0 10px;
+  max-height: 100vh;
+  width: 200px;
+  float: left;
+  padding-bottom: 100px;
 }
 
 
@@ -101,7 +137,7 @@ button:hover {
 * {box-sizing: border-box;}
 
 .header {
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #f1f1f1;
   padding: 20px 10px;
 }
@@ -189,13 +225,21 @@ button:hover {
   -webkit-transform: rotate(-3deg);
 }
 
-.column {
-  width: auto;
+/* .column {
+  width: 200px;
   float: left;
   padding-bottom: 100px;
+} */
+
+.column-center {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  margin-left:0;
+  color: #777;
+  text-align: center;
 }
 .portlet {
-  margin: 0 1em 1em 0;
   padding: 0.3em;
   cursor: move;
 }
