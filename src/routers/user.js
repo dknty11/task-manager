@@ -42,22 +42,12 @@ router.post('/users/login', async (req, res) => {
         })
     } catch (e) {
         console.log(e)
-        res.status(400).send(e)
+        res.status(400).json({ error: e})
     }
 })
 
-router.get('/users/me', async (req, res) => {
-    if (req.session && req.session.user) {
-        console.log('You are logged in')
-        res.redirect('/tasks')
-    } else {
-        res.json({
-            status: 401,
-            message: 'error login'
-        })
-        res.redirect('/users/login')
-    }
-
+router.get('/users/me', auth, async (req, res) => {
+    res.send(req.user)
 })
 
 router.get('/user/:id', async (req, res) => {
