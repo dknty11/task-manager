@@ -3,6 +3,7 @@ const path = require('path')
 const session = require('client-sessions')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 require('./db/mongoose')
 const userRouter = require('./routers/user')
@@ -26,8 +27,11 @@ app.use(express.static(publicDirectoryPath))
 app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({  extended: true })) // support encoded bodies
 
-// User cookie parser to handle cookie
+// Use cookie parser to handle cookie
 app.use(cookieParser())
+
+// Use CORS
+app.use(cors())
 
 // Setup session for express
 app.use(session({

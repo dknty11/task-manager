@@ -17,7 +17,7 @@ router.post('/users', async (req, res) => {
         res.cookie('token', token)
         res.json({ 
             status: 200,
-            redirect: '/users/me'
+            user: user
         })
         // res.status(201).send({ user, token })
     } catch (e) {
@@ -34,7 +34,12 @@ router.post('/users/login', async (req, res) => {
         // save user to req.session, the session already define in app.js
         req.session.user = user
         res.cookie('token', token)
-        res.redirect('/tasks')
+        // res.redirect('/tasks')
+        res.status(200).send({
+            success: true,
+            token: `Bearer ${token}`,
+            user: user
+        })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
