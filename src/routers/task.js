@@ -12,10 +12,9 @@ router.post('/tasks', auth, async (req, res) => {
 
     try {
         await task.save()
-        // res.json({
-        //     status: 201
-        // })
-        res.redirect('/tasks')
+        res.status(201).send({
+            task
+        })
     } catch (e) {
         res.status(500).send(e)
     }
@@ -51,7 +50,7 @@ router.get('/tasks', auth, async (req, res) => {
 
     if (req.query.sortBy) {
         const parts = req.query.sortBy.split(':')
-        sort[parts[0]] = parts[1] === 'desc'? -1 : 1
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
         options.sort = sort
     }
 
@@ -61,8 +60,7 @@ router.get('/tasks', auth, async (req, res) => {
             match: match,
             options: options,
         }).execPopulate()
-        // res.send(req.user.tasks)
-        res.render('home', { 'data': req.user.tasks, 'user': req.user })
+        res.send(req.user.tasks)
     } catch (e) {
         res.status(500).send(e)
     }

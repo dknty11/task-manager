@@ -1,6 +1,6 @@
 const express = require('express')
 const path = require('path')
-const session = require('client-sessions')
+// const session = require('client-sessions')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
@@ -34,14 +34,14 @@ app.use(cookieParser())
 app.use(cors())
 
 // Setup session for express
-app.use(session({
-    cookieName: 'session',
-    secret: 'hehehehihihihahahah3h3h3',
-    duration: 30*60*1000,
-    httpOnly: true,
-    secure: true,
-    ephemeral: true
-}))
+// app.use(session({
+//     cookieName: 'session',
+//     secret: 'hehehehihihihahahah3h3h3',
+//     duration: 30*60*1000,
+//     httpOnly: true,
+//     secure: true,
+//     ephemeral: true
+// }))
 
 app.use(express.json())
 app.use(userRouter)

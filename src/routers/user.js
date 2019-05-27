@@ -15,11 +15,7 @@ router.post('/users', async (req, res) => {
         const token = await user.generateAuthToken()
         req.session.user = user
         res.cookie('token', token)
-        res.json({ 
-            status: 200,
-            user: user
-        })
-        // res.status(201).send({ user, token })
+        res.status(201).send({ user, token })
     } catch (e) {
         res.status(500).send(e)
     }
@@ -29,17 +25,7 @@ router.post('/users/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.username, req.body.password)
         const token = await user.generateAuthToken()
-        // res.send({ user, token })
-
-        // save user to req.session, the session already define in app.js
-        req.session.user = user
-        res.cookie('token', token)
-        // res.redirect('/tasks')
-        res.status(200).send({
-            success: true,
-            token: `Bearer ${token}`,
-            user: user
-        })
+        res.status(200).send({ user, token })
     } catch (e) {
         console.log(e)
         res.status(400).json({ error: e})
