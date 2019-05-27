@@ -1,0 +1,37 @@
+.Auth {
+  margin: 20px auto;
+  padding: 10px;
+  box-shadow: 0 2px 3px #ccc;
+  text-align: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 80%
+}
+
+.Auth input {
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Auth label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.Auth input:focus {
+  outline: none;
+  background-color: #ccc;
+}
+
+@media (min-width: 600px) {
+  .Auth {
+    width: 500px
+  }
+}

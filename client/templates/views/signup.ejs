@@ -21,30 +21,6 @@
                 <button value="Sign Up" name="submit">Submit</button>
             </form>
         </div>
-    </div>
-    <% include ../partials/footer %>
-    <script>
-        var api_url = 'localhost:3000'
-        $('button').click(function(e) {
-            e.preventDefault();
-            var name = document.getElementById('name').value
-            var email = document.getElementById('email').value
-            var password = document.getElementById('password').value
-            $.ajax({
-                method: 'POST',
-                url: '/users',
-                data: {
-                    name: name,
-                    email: email,
-                    password: password
-                }
-            }).done( function(res) {
-                if (res.status) {
-                    console.log(res)
-                    window.location.href = res.redirect
-                }
-            })
-        })
-    </script>
+    </div>    
 </body>
 </html>

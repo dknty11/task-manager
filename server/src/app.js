@@ -33,16 +33,6 @@ app.use(cookieParser())
 // Use CORS
 app.use(cors())
 
-// Setup session for express
-// app.use(session({
-//     cookieName: 'session',
-//     secret: 'hehehehihihihahahah3h3h3',
-//     duration: 30*60*1000,
-//     httpOnly: true,
-//     secure: true,
-//     ephemeral: true
-// }))
-
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)

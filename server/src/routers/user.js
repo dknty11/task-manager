@@ -13,10 +13,11 @@ router.post('/users', async (req, res) => {
         await user.save()
         // sendWelcomeEmail(user.email, user.name)
         const token = await user.generateAuthToken()
-        req.session.user = user
-        res.cookie('token', token)
         res.status(201).send({ user, token })
     } catch (e) {
+        if (e.code === 11000) {
+            res.status(500).send({'message': 'Your email already exist'})
+        }
         res.status(500).send(e)
     }
 })
@@ -27,8 +28,7 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken()
         res.status(200).send({ user, token })
     } catch (e) {
-        console.log(e)
-        res.status(400).json({ error: e})
+        res.status(400).send({ error: e.message })
     }
 })
 
