@@ -2,27 +2,14 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import './Auth.css';
-import Input from '../../components/UI/Input/Input';
-import Button from '../../components/UI/Button/Button';
-import * as actions from '../../store/actions/index';
+import './Login.css'
+import Input from '../../../components/UI/Input/Input';
+import Button from '../../../components/UI/Button/Button';
+import * as actions from '../../../store/actions/index';
 
 class Auth extends Component {
   state = {
     controls: {
-      name: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'name',
-          placeholder: 'Your name...'
-        },
-        value: '',
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
       email: {
         elementType: 'input',
         elementConfig: {
@@ -54,17 +41,6 @@ class Auth extends Component {
     }
   }
 
-  componentDidMount() {}
-  
-  checkValidity = (value, rules) => {
-    let isValid = false
-    if (!rules.required) {
-      isValid = true
-    }
-
-    return isValid
-  }
-
   onInputChangeHandler = (event, controlName) => {
     const updatedControls = {
       ...this.state.controls,
@@ -80,7 +56,6 @@ class Auth extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    const name = this.state.controls.name.value
     const email = this.state.controls.email.value
     const password = this.state.controls.password.value
     this.props.onSubmitHandler(name, email, password)
@@ -106,10 +81,6 @@ class Auth extends Component {
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
         value={formElement.config.value}
-        invalid={!formElement.config.valid}
-        shouldValidate={formElement.config.validation}
-        touched={formElement.config.touched}
-        changed={(event) => this.onInputChangeHandler(event, formElement.id)}
       />
     ))
 

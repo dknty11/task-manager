@@ -1,3 +1,8 @@
 export {
+  signIn,
   signUp
-} from './auth'
+} from './auth';
+export {
+  fetchingTasks,
+  creatingTasks
+} from './tasks';

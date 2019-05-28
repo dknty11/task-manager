@@ -9,9 +9,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import authReducer from './store/reducers/auth'
+import tasksReducer from './store/reducers/tasks';
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  tasks: tasksReducer
 })
 
 const logger = store => {
