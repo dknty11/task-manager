@@ -47,7 +47,6 @@ class Auth extends Component {
       [controlName]: {
         ...this.state.controls[controlName],
         value: event.target.value,
-        valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
         touched: true
       }
     };
@@ -58,7 +57,7 @@ class Auth extends Component {
     event.preventDefault();
     const email = this.state.controls.email.value
     const password = this.state.controls.password.value
-    this.props.onSubmitHandler(name, email, password)
+    this.props.onSubmitHandler(email, password)
   }
 
   render() {
@@ -81,12 +80,13 @@ class Auth extends Component {
         elementType={formElement.config.elementType}
         elementConfig={formElement.config.elementConfig}
         value={formElement.config.value}
+        changed={(event) => this.onInputChangeHandler(event, formElement.id)}
       />
     ))
 
     let error = null;
     if (this.props.error) {
-      error = <p style={{color: 'red'}}>{this.props.error.message}</p>
+      error = <p style={{color: 'red'}}>{this.props.error.error}</p>
     }
 
     return (
@@ -95,7 +95,7 @@ class Auth extends Component {
         {error}
         <form action="" onSubmit={this.submitHandler}>
           {form}
-          <Button btnType="Success">SIGN UP</Button>
+          <Button btnType="Success">SIGN IN</Button>
         </form>
       </div>
     )
@@ -111,7 +111,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitHandler: (name, email, password) => dispatch(actions.signUp(name, email, password))
+    onSubmitHandler: (email, password) => dispatch(actions.signIn(email, password))
   }
 }
 

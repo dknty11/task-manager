@@ -16,7 +16,7 @@ router.post('/users', async (req, res) => {
         res.status(201).send({ user, token })
     } catch (e) {
         if (e.code === 11000) {
-            res.status(500).send({'message': 'Your email already exist'})
+            res.status(500).send({'error': 'Your email already exist'})
         }
         res.status(500).send(e)
     }
@@ -24,7 +24,7 @@ router.post('/users', async (req, res) => {
 
 router.post('/users/login', async (req, res) => {
     try {
-        const user = await User.findByCredentials(req.body.username, req.body.password)
+        const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
         res.status(200).send({ user, token })
     } catch (e) {

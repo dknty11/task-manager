@@ -11,7 +11,7 @@ class Tasks extends Component {
   }
 
   render() {
-    let task = <NewTask />
+    let task = <NewTask />;
     if (this.props.tasks.length !== 0) {
       task = this.props.tasks.map(task => (
         <div key={task._id}>

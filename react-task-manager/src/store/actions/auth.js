@@ -1,6 +1,9 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
+/***************************************************
+----------------------SIGN UP-----------------------
+****************************************************/
 export const signUpStart = () => {
   return {
     type: actionTypes.SIGN_UP_START
@@ -43,6 +46,10 @@ export const signUp = (name, email, password) => {
   }
 }
 
+/***************************************************
+----------------------SIGN IN-----------------------
+****************************************************/
+
 export const signInStart = () => {
   return {
     type: actionTypes.SIGN_IN_START
@@ -78,8 +85,37 @@ export const signIn = (email, password) => {
         dispatch(signInSuccess(res.data.user._id, res.data.token))
       })
       .catch(err => {
-        console.log(err.response.data)
         dispatch(signInFail(err.response.data))
       })
+  }
+}
+
+/***************************************************
+----------------------SIGN OUT-----------------------
+****************************************************/
+
+export const signOutSuccess = () => {
+  return {
+    type: actionTypes.SIGN_OUT_SUCCESS
+  }
+}
+
+export const signOut = () => {
+  return dispatch => {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('token')
+    dispatch(signOutSuccess())
+  }
+}
+
+/***************************************************
+----------------------AUTO SIGN IN------------------
+****************************************************/
+
+export const tryAutoSignIn = () => {
+  return dispatch => {
+    const userId = localStorage.getItem('userId')
+    const tokenId = localStorage.getItem('token');
+    dispatch(signInSuccess(userId, tokenId))
   }
 }

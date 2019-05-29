@@ -54,8 +54,9 @@ class NewTask extends Component {
   }
 
   onCreateHandler = (e) => {
-    e.preventDefault();
     // Remember submit form will cause page reload by default
+    e.preventDefault();
+
     const title = this.state.controls.title.value
     const description = this.state.controls.description.value
     const complete = this.state.controls.complete.value

@@ -1,6 +1,8 @@
 export {
   signIn,
-  signUp
+  signUp,
+  signOut,
+  tryAutoSignIn
 } from './auth';
 export {
   fetchingTasks,
