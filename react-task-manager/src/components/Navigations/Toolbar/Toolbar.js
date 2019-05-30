@@ -4,13 +4,17 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import './Toolbar.css'
 
-const Toolbar = (props) => (
+const toolbar = (props) => (
   <header className="ToolBar">
-    <Logo height="50px" />
-    <NavigationItems
-      isAuthenticated={props.isAuthenticated}
-    />
+    <div className="Logo1">
+      <Logo height="50px" />
+    </div>
+    <nav className="DesktopOnly">
+      <NavigationItems
+        isAuthenticated={props.isAuthenticated}
+      />
+    </nav>
   </header>
 )
 
-export default Toolbar;
+export default toolbar;

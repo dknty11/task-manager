@@ -67,3 +67,41 @@ export const creatingTasks = (title, description, complete) => {
       .catch(err => dispatch(creatingTaskFail(err)))
   }
 }
+
+/***************************************************
+----------------------UPDATE TASK-------------------
+****************************************************/
+const update_task_start = () => {
+  return {
+    type: actionTypes.UPDATE_TASK_START
+  }
+}
+
+const update_task_success = (task) => {
+  return {
+    type: actionTypes.UPDATE_TASK_SUCCESS,
+    task
+  }
+}
+
+const update_task_fail = (error) => {
+  return {
+    type: actionTypes.UPDATE_TASK_FAIL,
+    error
+  }
+}
+
+export const updateTask = (id, description, complete) => {
+  return dispatch => {
+    dispatch(update_task_start())
+    const task = {
+      description,
+      complete
+    }
+    const token = localStorage.getItem('token')
+    axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    axios.patch('http://localhost:3003/tasks/' + id, task)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
+}

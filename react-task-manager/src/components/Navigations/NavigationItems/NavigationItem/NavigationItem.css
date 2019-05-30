@@ -1,0 +1,7 @@
+.NavigationItem {
+  display: inline;
+}
+
+.NavigationItem a {
+  margin-left: 10px;
+}

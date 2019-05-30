@@ -9,6 +9,7 @@ import Tasks from './containers/Tasks/Tasks';
 import './App.css';
 import * as actions from './store/actions/index';
 import Logout from './containers/Auth/Logout/Logout';
+import NewTask from './containers/Tasks/NewTask/NewTask';
 
 class App extends Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
+          <Route path="/new-task" component={NewTask} />
           <Route path="/signout" component={Logout} />
           <Route path="/tasks" component={Tasks} />
           <Route path="/signup" component={Auth} />

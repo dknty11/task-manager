@@ -87,6 +87,11 @@ export const signIn = (email, password) => {
       .catch(err => {
         dispatch(signInFail(err.response.data))
       })
+    setTimeout(() => {
+      dispatch(signOut())
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+    }, 3600*1000)
   }
 }
 

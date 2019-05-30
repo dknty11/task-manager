@@ -1,5 +1,5 @@
 .ToolBar {
-  height: 56px;
+  height: 62px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -11,4 +11,19 @@
   padding: 0 20px;
   box-sizing: border-box;
   z-index: 90;
+  text-align: center;
+}
+
+.ToolBar .Logo1 {
+  height: 80%;
+}
+
+.Toolbar nav {
+  height: 100%;
+}
+
+@media (max-width: 499px) {
+  .DesktopOnly {
+      display: none;
+  }
 }

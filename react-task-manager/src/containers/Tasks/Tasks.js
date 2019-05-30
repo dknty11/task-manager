@@ -3,24 +3,31 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
-import NewTask from './NewTask/NewTask';
+import Task from '../../components/UI/Task/Task';
+import './Tasks.css';
 
 class Tasks extends Component {
   componentDidMount() {
     this.props.onFetchingTasks()
   }
 
-  render() {
-    let task = <NewTask />;
-    if (this.props.tasks.length !== 0) {
-      task = this.props.tasks.map(task => (
-        <div key={task._id}>
-          <p>task name: {task.title}</p>
-          <p>status: {task.status}</p>
-          <p>description: {task.description}</p>
-          <p>created at: {task.createdAt}</p>
-        </div>
-      ))
+  onDrag = (event, task) => {
+    event.preventDefault();
+    this.props.onUpdateTask(task._id, 'moved', 'true')
+  }
+
+  render() {    
+    const task = this.props.tasks.map(task => (
+      <Task
+        key={task._id}
+        task={task}
+        dragged={(event) => this.onDrag(event, task)}
+      />
+    ))
+
+    let newTask = null;
+    if (this.props.tasks.length === 0 && !this.props.loading) {
+      newTask = <Redirect to="/new-task" />
     }
 
     let redirect = null;
@@ -29,8 +36,27 @@ class Tasks extends Component {
     }
     return (
       <div>
+        {newTask}
         {redirect}
-        {task}
+        <div className="column">
+          <div className="column-center">
+            <h4>To do</h4>
+          </div>
+          {task}
+        </div>
+        <div className="column">
+          <div className="column-center">
+            <h4>In Progress</h4>
+          </div>
+          {task}
+        </div>
+        <div className="column">
+          <div className="column-center">
+            <h4>Done</h4>
+          </div>
+          {task}
+        </div>
+
       </div>
     )
   }
@@ -39,13 +65,15 @@ class Tasks extends Component {
 const mapStateToProps = state => {
   return {
     tasks: state.tasks.taskList,
+    loading: state.tasks.loading,
     isAuthenticated: state.auth.tokenId !== null
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchingTasks: () => dispatch(actions.fetchingTasks())
+    onFetchingTasks: () => dispatch(actions.fetchingTasks()),
+    onUpdateTask: (id, description, complete) => dispatch(actions.updateTask(id, description, complete))
   }
 }
 

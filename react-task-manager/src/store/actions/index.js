@@ -6,5 +6,6 @@ export {
 } from './auth';
 export {
   fetchingTasks,
-  creatingTasks
+  creatingTasks,
+  updateTask
 } from './tasks';

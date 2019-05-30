@@ -1,0 +1,30 @@
+.Task {
+  width: 100%;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  /* cursor: move; */
+}
+
+.Task span {
+  text-transform: 'capitalize';
+  display: flex;
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.portlet-header {
+  background-color: #ccc;
+  box-shadow: 0 2px 3px #eee;
+  padding: 0.2em 0.3em;
+  margin-bottom: 0.5em;
+  position: relative;
+  border: 1px solid #ccc;
+  cursor: move;
+}
+
+.portlet-content {
+  padding: 0.4em;
+}

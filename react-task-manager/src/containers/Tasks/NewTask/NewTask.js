@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input'
 import Button from '../../../components/UI/Button/Button'
@@ -61,6 +62,7 @@ class NewTask extends Component {
     const description = this.state.controls.description.value
     const complete = this.state.controls.complete.value
     this.props.onCreate(title, description, complete)
+    this.props.history.push('/tasks')
   }
 
   render () {
@@ -105,4 +107,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTask);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewTask));
