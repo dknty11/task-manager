@@ -16,14 +16,39 @@ class Tasks extends Component {
     this.props.onUpdateTask(task._id, 'moved', 'true')
   }
 
-  render() {    
-    const task = this.props.tasks.map(task => (
-      <Task
-        key={task._id}
-        task={task}
-        dragged={(event) => this.onDrag(event, task)}
-      />
-    ))
+  render() {
+    const finishedTask = this.props.tasks.map(task => {
+      if (task.complete && task.status !== 'to do') {
+        return (
+          <Task
+            key={task._id}
+            task={task}
+          />
+        )
+      }
+    })
+    const todoTask = this.props.tasks.map(task => {
+      if (task.status === 'to do') {
+        return (
+          <Task
+            key={task._id}
+            task={task}
+            dragged={(event) => this.onDrag(event, task)}
+          />
+        )
+      }
+    })
+    const inProgresstask = this.props.tasks.map(task => {
+      if (!task.complete) {
+        return (
+          <Task
+            key={task._id}
+            task={task}
+            dragged={(event) => this.onDrag(event, task)}
+          />
+        )
+      }
+    })
 
     let newTask = null;
     if (this.props.tasks.length === 0 && !this.props.loading) {
@@ -42,19 +67,19 @@ class Tasks extends Component {
           <div className="column-center">
             <h4>To do</h4>
           </div>
-          {task}
+          {todoTask}
         </div>
         <div className="column">
           <div className="column-center">
             <h4>In Progress</h4>
           </div>
-          {task}
+          {inProgresstask}
         </div>
         <div className="column">
           <div className="column-center">
             <h4>Done</h4>
           </div>
-          {task}
+          {finishedTask}
         </div>
 
       </div>
