@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
 
-import Layout from './hoc/Layout/Layout';
-import Auth from './containers/Auth/Auth';
-import Login from './containers/Auth/Login/Login';
-import Tasks from './containers/Tasks/Tasks';
-import './App.css';
-import * as actions from './store/actions/index';
-import Logout from './containers/Auth/Logout/Logout';
-import NewTask from './containers/Tasks/NewTask/NewTask';
+import Layout from "./hoc/Layout/Layout";
+import Auth from "./containers/Auth/Auth";
+import Login from "./containers/Auth/Login/Login";
+import Tasks from "./containers/Tasks/Tasks";
+import "./App.css";
+import * as actions from "./store/actions/index";
+import Logout from "./containers/Auth/Logout/Logout";
+import NewTask from "./containers/Tasks/NewTask/NewTask";
 
 class App extends Component {
   componentDidMount() {
-    this.props.onTrySignIn()
+    this.props.onTrySignIn();
   }
-  render () {
+  render() {
     return (
       <Layout>
         <Switch>
@@ -26,14 +26,17 @@ class App extends Component {
           <Route path="/signin" component={Login} />
         </Switch>
       </Layout>
-    )
+    );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onTrySignIn: () => dispatch(actions.tryAutoSignIn())
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

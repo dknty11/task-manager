@@ -1,63 +1,58 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-import * as actions from '../../store/actions/index';
-import Task from '../../components/UI/Task/Task';
-import './Tasks.css';
+import * as actions from "../../store/actions/index";
+import Task from "../../components/UI/Task/Task";
+import "./Tasks.css";
 
 class Tasks extends Component {
   componentDidMount() {
-    this.props.onFetchingTasks()
+    this.props.onFetchingTasks();
   }
 
   onDrag = (event, task) => {
     event.preventDefault();
-    this.props.onUpdateTask(task._id, 'moved', 'true')
-  }
+    this.props.onUpdateTask(task._id, "moved", "true");
+  };
 
   render() {
     const finishedTask = this.props.tasks.map(task => {
-      if (task.complete && task.status !== 'to do') {
-        return (
-          <Task
-            key={task._id}
-            task={task}
-          />
-        )
+      if (task.complete && task.status !== "to do") {
+        return <Task key={task._id} task={task} />;
       }
-    })
+    });
     const todoTask = this.props.tasks.map(task => {
-      if (task.status === 'to do') {
+      if (task.status === "to do") {
         return (
           <Task
             key={task._id}
             task={task}
-            dragged={(event) => this.onDrag(event, task)}
+            dragged={event => this.onDrag(event, task)}
           />
-        )
+        );
       }
-    })
+    });
     const inProgresstask = this.props.tasks.map(task => {
       if (!task.complete) {
         return (
           <Task
             key={task._id}
             task={task}
-            dragged={(event) => this.onDrag(event, task)}
+            dragged={event => this.onDrag(event, task)}
           />
-        )
+        );
       }
-    })
+    });
 
     let newTask = null;
     if (this.props.tasks.length === 0 && !this.props.loading) {
-      newTask = <Redirect to="/new-task" />
+      newTask = <Redirect to="/new-task" />;
     }
 
     let redirect = null;
     if (!this.props.isAuthenticated) {
-      redirect = <Redirect to="/signup" />
+      redirect = <Redirect to="/signup" />;
     }
     return (
       <div>
@@ -81,9 +76,8 @@ class Tasks extends Component {
           </div>
           {finishedTask}
         </div>
-
       </div>
-    )
+    );
   }
 }
 
@@ -92,14 +86,18 @@ const mapStateToProps = state => {
     tasks: state.tasks.taskList,
     loading: state.tasks.loading,
     isAuthenticated: state.auth.tokenId !== null
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     onFetchingTasks: () => dispatch(actions.fetchingTasks()),
-    onUpdateTask: (id, description, complete) => dispatch(actions.updateTask(id, description, complete))
-  }
-}
+    onUpdateTask: (id, description, complete) =>
+      dispatch(actions.updateTask(id, description, complete))
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tasks);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tasks);
