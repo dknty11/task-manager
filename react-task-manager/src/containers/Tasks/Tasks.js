@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { DragDropContext } from "react-beautiful-dnd";
 
 import * as actions from "../../store/actions/index";
-import Task from "../../components/UI/Task/Task";
+// import Task from "../../components/UI/Task/Task";
+import Column from "./Column/Column";
 import "./Tasks.css";
 
 class Tasks extends Component {
@@ -11,39 +13,29 @@ class Tasks extends Component {
     this.props.onFetchingTasks();
   }
 
-  onDrag = (event, task) => {
-    event.preventDefault();
-    this.props.onUpdateTask(task._id, "moved", "true");
+  onDragEnd = result => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    this.props.tasks.splice(source.index, 1);
+    // this.props.tasks.splice(destination.index, 0, draggableId);
+    console.log(this.props.tasks);
   };
 
   render() {
-    const finishedTask = this.props.tasks.map(task => {
-      if (task.complete && task.status !== "to do") {
-        return <Task key={task._id} task={task} />;
-      }
-    });
-    const todoTask = this.props.tasks.map(task => {
-      if (task.status === "to do") {
-        return (
-          <Task
-            key={task._id}
-            task={task}
-            dragged={event => this.onDrag(event, task)}
-          />
-        );
-      }
-    });
-    const inProgresstask = this.props.tasks.map(task => {
-      if (!task.complete) {
-        return (
-          <Task
-            key={task._id}
-            task={task}
-            dragged={event => this.onDrag(event, task)}
-          />
-        );
-      }
-    });
+    // const taskList = this.props.tasks.map(task => {
+    //   return <TaskList key={task._id} task={task} />;
+    // });
 
     let newTask = null;
     if (this.props.tasks.length === 0 && !this.props.loading) {
@@ -55,28 +47,10 @@ class Tasks extends Component {
       redirect = <Redirect to="/signup" />;
     }
     return (
-      <div>
-        {newTask}
+      <DragDropContext onDragEnd={this.onDragEnd}>
         {redirect}
-        <div className="column">
-          <div className="column-center">
-            <h4>To do</h4>
-          </div>
-          {todoTask}
-        </div>
-        <div className="column">
-          <div className="column-center">
-            <h4>In Progress</h4>
-          </div>
-          {inProgresstask}
-        </div>
-        <div className="column">
-          <div className="column-center">
-            <h4>Done</h4>
-          </div>
-          {finishedTask}
-        </div>
-      </div>
+        <Column tasks={this.props.tasks} />
+      </DragDropContext>
     );
   }
 }
