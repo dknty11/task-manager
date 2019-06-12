@@ -108,3 +108,35 @@ export const updateTask = (id, description, complete) => {
       .catch(err => console.log(err));
   };
 };
+
+/***************************************************
+----------------------UPDATE TASK-------------------
+****************************************************/
+export const updateMovedTask = (des, src, id) => {
+  return {
+    type: actionTypes.MOVE_TASK,
+    des,
+    src,
+    id
+  };
+};
+
+export const moveTask = (des, src, dragId) => {
+  //get task id from server
+  return dispatch => {
+    const token = localStorage.getItem("token");
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    axios
+      .get("http://localhost:3003/tasks/" + dragId)
+      .then(res => {
+        dispatch(updateMovedTask(des, src, res.data));
+      })
+      .catch(err => console.log(err));
+  };
+  // return {
+  //   type: actionTypes.MOVE_TASK,
+  //   des,
+  //   src,
+  //   dragId
+  // };
+};

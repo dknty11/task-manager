@@ -14,6 +14,7 @@ class Tasks extends Component {
   }
 
   onDragEnd = result => {
+    console.log(result);
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -27,9 +28,10 @@ class Tasks extends Component {
       return;
     }
 
-    this.props.tasks.splice(source.index, 1);
+    // this.props.tasks.splice(source.index, 1);
     // this.props.tasks.splice(destination.index, 0, draggableId);
-    console.log(this.props.tasks);
+    // console.log(this.props.tasks);
+    this.props.onMoveTask(destination, source, draggableId);
   };
 
   render() {
@@ -67,7 +69,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchingTasks: () => dispatch(actions.fetchingTasks()),
     onUpdateTask: (id, description, complete) =>
-      dispatch(actions.updateTask(id, description, complete))
+      dispatch(actions.updateTask(id, description, complete)),
+    onMoveTask: (des, src, dragId) =>
+      dispatch(actions.moveTask(des, src, dragId))
   };
 };
 
