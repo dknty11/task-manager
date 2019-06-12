@@ -1,6 +1,4 @@
 deploy:
   provider: azure_web_apps
-  username: nguyenhoaivinh.1111@gmail.com       # If AZURE_WA_USERNAME isn't set
-  password: ${AZURE_WA_PASSWORD}
-  site: travis_react       # If AZURE_WA_SITE isn't set
-  #slot: azure_deployment_slotname       # (optional) If AZURE_WA_SLOT isn't set
+  on:
+    node: '10.14'
